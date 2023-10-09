@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Blog Data from Google Sheets</title>
+</head>
+<body>
+    <!-- <h1>Blog Data</h1>
+    <table id="blog-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Content</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+        </tbody>
+    </table> -->
+
+
+
+    <div class="bg-blue-50 pt-14 min-h-screen sm:pt-20">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto ">
+                <h2 class="text-3xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl">Press Events</h2>
+                <!-- <p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p> -->
+            </div>
+            <!-- <div class="mx-auto mt-10 max-w-5xl flex flex-col gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0"> -->
+                <!-- Blog articles will be inserted here -->
+                
+                <div class="blog-container mx-auto mt-10 max-w-5xl flex flex-col gap-x-8  border-t border-gray-200 bg-white rounded-t-3xl p-10 sm:mt-16  divide-y-2">
+                    <!-- Data will be inserted here -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        // Function to clean the data by removing special characters
+        function cleanData(data) {
+            return data.replace(/[^\w\s]/gi, ''); // Remove any special characters
+        }
+
+        async function fetchCsvData() {
+            
+            const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRblV4up_XEd4ZPlW8QVSkHb6cfuJLwK461v6uT67sPYezthYRO5eE7RdqWuZDaqCbWzgSgO7I3j1Aw/pub?output=csv'; 
+    
+
+            try {
+                const response = await fetch(csvUrl);
+                const csvData = await response.text();
+
+                // Parse the CSV data as needed and clean each field
+                const rows = csvData.split('\n');
+                const headers = rows[0].split(',');
+
+         
+                // const tableBody = document.querySelector('#blog-table tbody');
+                // tableBody.innerHTML = '';
+
+
+
+                const blogContainer = document.querySelector('.blog-container');
+
+
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i].split(',');
+                  
+                    // if (row.length === headers.length) {
+                        const rowData = {};
+                        for (let j = 0; j < headers.length; j++) {
+                            // Clean each field by removing special characters
+                            rowData[headers[j]] = row[j];
+                        }
+
+
+                      
+
+                        // const tableRow = document.createElement('tr');
+                        // tableRow.innerHTML = `
+                        //     <td>${rowData['Title']}</td>
+                        //     <td>${rowData['Date']}</td>
+                        //     <td>${rowData['Category']}</td>
+                        //     <td>${rowData['Content']}</td>
+                        //     <td>${rowData['Author']}</td>
+                        // `;
+
+                        // tableBody.appendChild(tableRow);
+                 
+
+
+
+console.log(rowData)
+
+
+                    const blogElement = document.createElement('article');
+
+                    // blogElement.classList.add('flex', 'flex-col', 'items-start', 'justify-between');
+
+// Populate the blog element with data
+blogElement.innerHTML = `
+<div class="my-8">
+    <a target='_blank' href=${rowData['Link']}>
+    <div class="flex items-center gap-x-4 text-xs">
+        <time datetime="2020-03-16" class="text-gray-500">${rowData['Date']}</time>
+        <span class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">${rowData['Category']}</span>
+    </div>
+    <div class="group relative">
+        <h3 class="mt-3 text-3xl font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+           
+                <span class="absolute inset-0"></span>
+                ${rowData['Title']}
+          
+        </h3>
+        <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">${rowData['Content']}</p>
+    </div>
+    <div class="relative mt-8 flex items-center gap-x-4">
+      
+        <div class="text-sm leading-6">
+            <p class="font-semibold text-gray-900">
+              
+                    <span class="absolute inset-0"></span>
+                    ${rowData['Author']}
+              
+            </p>
+            <p class="text-gray-600">~ ${rowData['Role']}</p>
+        </div>
+    </div>
+</a>
+    </div>
+
+`;
+
+// Append the blog element to the container
+blogContainer.appendChild(blogElement);
+
+}
+
+                // }
+            } catch (error) {
+                console.error('Error fetching CSV data:', error);
+            }
+        }
+
+        // Call the function to fetch and display CSV data
+        fetchCsvData();
+    </script>
+</body>
+</html>
+
+
+
+
