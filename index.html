@@ -9,154 +9,665 @@
     <title>Blog Data from Google Sheets</title>
 </head>
 <body>
-    <!-- <h1>Blog Data</h1>
-    <table id="blog-table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Content</th>
-                <th>Author</th>
-            </tr>
-        </thead>
-        <tbody>
-           
-        </tbody>
-    </table> -->
+ 
 
 
 
-    <div class="bg-blue-50 pt-14 min-h-screen sm:pt-20">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto ">
-                <h2 class="text-3xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl border-b-2 pb-6 ">Press Events</h2>
-                <!-- <p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p> -->
-            </div>
-            <!-- <div class="mx-auto mt-10 max-w-5xl flex flex-col gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0"> -->
-                <!-- Blog articles will be inserted here -->
-                
-                <div class="blog-container mx-auto mt-10 max-w-5xl flex flex-col gap-x-8  border-t border-gray-200 bg-white rounded-t-3xl p-10 sm:mt-16  divide-y-2">
-                    <!-- Data will be inserted here -->
-                <!-- </div> -->
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-    <script>
-        // Function to clean the data by removing special characters
-        function cleanData(data) {
-            return data.replace(/[^\w\s]/gi, ''); // Remove any special characters
-        }
-
-        async function fetchCsvData() {
-            
-            const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRblV4up_XEd4ZPlW8QVSkHb6cfuJLwK461v6uT67sPYezthYRO5eE7RdqWuZDaqCbWzgSgO7I3j1Aw/pub?output=csv'; 
     
 
-            try {
-                const response = await fetch(csvUrl);
-                const csvData = await response.text();
-
-                // Parse the CSV data as needed and clean each field
-                const rows = csvData.split('\n');
-                const headers = rows[0].split(',');
-
-         
-                // const tableBody = document.querySelector('#blog-table tbody');
-                // tableBody.innerHTML = '';
-
-
-
-                const blogContainer = document.querySelector('.blog-container');
-
-
-                for (let i = 1; i < rows.length; i++) {
-                    const row = rows[i].split(',');
-                  
-                    // if (row.length === headers.length) {
-                        const rowData = {};
-                        for (let j = 0; j < headers.length; j++) {
-                            // Clean each field by removing special characters
-                            rowData[headers[j]] = row[j];
-                        }
-
-
-                      
-
-                        // const tableRow = document.createElement('tr');
-                        // tableRow.innerHTML = `
-                        //     <td>${rowData['Title']}</td>
-                        //     <td>${rowData['Date']}</td>
-                        //     <td>${rowData['Category']}</td>
-                        //     <td>${rowData['Content']}</td>
-                        //     <td>${rowData['Author']}</td>
-                        // `;
-
-                        // tableBody.appendChild(tableRow);
-                 
-
-
-
-console.log(rowData)
-
-
-                    const blogElement = document.createElement('article');
-
-                    // blogElement.classList.add('flex', 'flex-col', 'items-start', 'justify-between');
-
-// Populate the blog element with data
-blogElement.innerHTML = `
-<div class="my-8">
-    <a target='_blank' href=${rowData['Link']}>
-    <div class="flex items-center gap-x-4 text-xs">
-        <time datetime="2020-03-16" class="text-gray-500">${rowData['Date']}</time>
-        <span class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">${rowData['Category']}</span>
-    </div>
-    <div class="group relative">
-        <h3 class="mt-3 text-3xl font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-           
-                <span class="absolute inset-0"></span>
-                ${rowData['Title']}
-          
-        </h3>
-        <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">${rowData['Content']}</p>
-    </div>
-    <div class="relative mt-8 flex items-center gap-x-4">
-      
-        <div class="text-sm leading-6">
-            <p class="font-semibold text-gray-900">
-              
-                    <span class="absolute inset-0"></span>
-                    ${rowData['Author']}
-              
-            </p>
-            <p class="text-gray-600">~ ${rowData['Role']}</p>
+    <section class="text-gray-600 body-font">
+        <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="./assets//hero.png">
+          <div class="text-center lg:w-2/3 w-full">
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">The TollGuru Story</h1>
+            <p class="mb-8 leading-relaxed">The idea behind TollGuru is simple! Before you fly, you get to compare and pick your flight based on flight time and ticket cost. But when you drive, the common mapping apps such
+                as Google or Apple only show you travel time. You do not get to choose your route based
+                on travel time and trip cost. You can either "avoid tolls" or go on the fastest route.
+                There was no website or app that let you choose your route based on both cost and time.
+                There are a few websites that show gas expenses and a few others that show you tolls.
+                TollGuru calculates tolls & gas costs for different routes and lets you choose from the
+                cheapest, the fastest, and the compromise routes.</p>
+            <!-- <div class="flex justify-center">
+              <button class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">Button</button>
+              <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
+            </div> -->
+          </div>
         </div>
-    </div>
-</a>
-    </div>
+      </section>
 
-`;
 
-// Append the blog element to the container
-blogContainer.appendChild(blogElement);
 
-}
+      <section class="text-gray-600 body-font">
+        <div class="container mx-auto flex px-5 py-10 md:flex-row flex-col items-center">
+          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Our goal is to
+                
+              <br class="hidden lg:inline-block">reduce traffic congestion
+            </h1>
+            <p class="mb-8 leading-relaxed">The usage of better traffic information from
+                mapping apps like Google, Waze, Apple has
+                not reduced traffic congestion.
+                Even when the overall vehicle miles
+                traveled (VMT) has hardly changed in
+                recent decades. Lets use a hypothetical scenario to
+                see why congestion has become
+                worse.
+                Say 5,000 travelers need to go from
+                Franklin to Arlington.
+                There are two roads: A and B. Road
+                A is faster: it takes 25 minutes and
+                can handle 3,000 cars per hour. B is
+                slower by 5 minutes and can carry
+                2,000 cars per hour.</p>
+            
+          </div>
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img class="object-cover object-center rounded" alt="hero" src="./assets/goal1.png">
+          </div>
+        </div>
+      </section> 
+      
+     
 
-                // }
-            } catch (error) {
-                console.error('Error fetching CSV data:', error);
-            }
-        }
 
-        // Call the function to fetch and display CSV data
-        fetchCsvData();
-    </script>
+
+
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto flex flex-col">
+          <div class="lg:w-full mx-auto">
+            <div class="rounded-lg h-64 overflow-hidden">
+              <img alt="content" class="object-contain object-center h-full w-full" src="./assets/goal3.png">
+            </div>
+            <div class="flex flex-col sm:flex-row mt-10">
+              <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <div class="flex flex-col items-center text-center justify-center">
+                  <!-- <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">Phoebe Caulfield</h2> -->
+                  <div class="w-12 h-1 bg-blue-500 rounded mt-2 mb-4"></div>
+                  <p class="text-base">We know that travelers use our app and website to find their toll
+                    cost and gas expenses. But like Adam Smiths “invisible hand”,
+                    travelers choice to consider travel cost, in addition to travel time,
+                    “
+                    ends up making traffic better for everyone.</p>
+                </div>
+              </div>
+              <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                <p class="leading-relaxed text-lg mb-4">Now say 4,000 travelers check mapping app
+                    on their phone. Almost all of them use road
+                    A (since that is the faster and they dont
+                    know the cost). But the road can only handle
+                    3,000 cars per hour. Without an ability to
+                    handle traffic flow of 4,000 cars, the road
+                    gets congested. It can now carry a fraction
+                    of original capacity (in technical language, it
+                    is now operating in Level of Service F).</p>
+                <a class="text-blue-500 inline-flex items-center">Learn More
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Product Information </h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">TollGuru calculates and compares between travel time and travel costs (fuel and
+                toll) to show the “cheapest” route, the “fastest” route and the compromise
+                routes. We overlay mapping apps (Google maps, HERE maps, Apple maps) with
+                cost information to allow users to choose between their routes. For trucks, we
+                show truck specific routes so that they are not routed on roads where trucks are
+                prohibited. Its Toll API is especially handy for rideshares, logistics and last mile
+                delivery businesses to pick cost effective routes and accurate billing. </p>
+          </div>
+          <div class="flex flex-wrap -m-4 text-center">
+            <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+              <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+               
+<img src="./assets/icons/calculator.png" class="w-20 mx-auto mb-3" alt="">
+            
+                <p class="leading-relaxed">Web Calculator</p>
+              </div>
+            </div>
+            <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+              <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                <img src="./assets/icons/playStore.png" class="w-20 mx-auto mb-3" alt="">
+             
+                <p class="leading-relaxed">Play Store</p>
+              </div>
+            </div>
+            <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+              <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                <img src="./assets/icons/appStore.png" class="w-20 mx-auto mb-3" alt="">
+           
+                <p class="leading-relaxed">App Store</p>
+              </div>
+            </div>
+            <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+              <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                <img src="./assets/icons/api.png" class="w-20 mx-auto mb-3" alt="">
+    
+                <p class="leading-relaxed">Toll API</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-col text-center w-full mb-20">
+            <!-- <h2 class="text-base text-blue-500 tracking-widest font-medium title-font mb-1">ROOF PARTY POLAROID</h2> -->
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">TollGuru Features</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">TollGuru makes travel decision better. With lots of features, TollGuru products
+                benefit over a 3 million travelers, truckers and business in North America, South
+                America, Asia, Western Europe and Australia.</p>
+          </div>
+          <div class="flex flex-wrap">
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Complete coverage</h2>
+              <p class="leading-relaxed text-base mb-4">All types of toll roads, turnpikes, bridges,
+                tunnels, tollways, motorways,
+                expressways across geographies. </p>
+                 
+            </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Cost and time trade-off</h2>
+              <p class="leading-relaxed text-base mb-4">Lets you compare routes based on
+                tolls & gas costs, time and distance so
+                that you can decide on our own. </p>
+                 
+            </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">All vehicle types</h2>
+              <p class="leading-relaxed text-base mb-4">Supports cars and SUVs (with trailers),
+                trucks (up to 9 axles), RVs, buses and
+                motorcycles (with or without trailer).</p>
+                 
+            </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Truck compliant routes with HOS
+                stops </h2>
+              <p class="leading-relaxed text-base mb-4">Offers truck only or truck compliant
+                routes across geographies with Hours of
+                Service stops and recommendations for
+                parking, rest areas, shower, fuel stops. </p>
+                 
+            </div>  
+            
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">All toll payment options with discounts </h2>
+              <p class="leading-relaxed text-base mb-4">Shows toll costs & discounts for all toll
+                payment options: Mainly; Cash, Tag
+                Transponder (e.g. E-ZPass, SunPass)
+                and Video (e.g. Pay-by-Mail,
+                Toll-by-Plate). </p>
+                 
+            </div>
+<div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Time based tolls & tolls on the map </h2>
+              <p class="leading-relaxed text-base mb-4">Shows tolls at the time of your travel
+                (select departure time): peak,
+                off-peak, weekends. It shows toll
+                locations, rates and eligible tag
+                transponders on the map.  </p>
+                 
+            </div>          
+            
+<div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">TBT Navigation</h2>
+              <p class="leading-relaxed text-base mb-4">Voice enabled Turn-by-Turn navigation
+                to ensure that you reach your
+                destination without any hassles.   </p>
+                 
+            </div>          
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Share your route </h2>
+                <p class="leading-relaxed text-base mb-4">Save, print or share your route results
+                    with family and friends .  </p>
+                    
+                </div>          
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                    <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Post trip analysis </h2>
+                    <p class="leading-relaxed text-base mb-4">Fuel and toll tax reporting, additional
+                        visibility into past trips, lane analysis, toll
+                        savings & recommendations & State
+                        Mileage.  </p>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+          </div>
+       
+        </div>
+      </section>
+
+
+   
+      
+
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+
+            <h2 class="text-base text-blue-500 tracking-widest font-medium title-font mb-1">Some mentions that we have earned</h2>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Media Presence</h1>
+
+          <div class="flex flex-wrap -m-4">
+            <div class="p-4 md:w-1/3">
+              <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo1.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The Catalyzer</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo2.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The 400 Blows</h1>
+                    -->
+                  <div class="flex items-center flex-wrap">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo3.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo4.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo5.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo6.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo7.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo8.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo9.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo10.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="p-4 md:w-1/3">
+              <div class="bg-[#F1F2F7] h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img class="lg:h-48     md:h-36 p-8 w-full object-contain object-center" src="./assets/mediaLogos/mediaLogo11.png" alt="blog">
+                <div class="p-6">
+                  <!-- <h2 class="tracking-widest text-base title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
+                    -->
+                  <div class="flex items-center flex-wrap ">
+                    <a href="" class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                      <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+           
+
+
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <h1 class="text-3xl font-medium title-font text-gray-900 mb-12 text-center">Testimonials</h1>
+          <div class="flex flex-wrap -m-4">
+            <div class="p-4 md:w-1/2 w-full">
+              <div class="h-full bg-gray-100 p-8 rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4" viewBox="0 0 975.036 975.036">
+                  <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+                </svg>
+                <p class="leading-relaxed mb-6">Were from the UK and so the toll system was not easy for us to understand. This app made the stress of toll charges much easier to avoid. Our car hire company wanted $500 to "hire" and easypass system for the six week hire.... we were told without it we would get a $15 fine for each violation, this app told us the charges and if we could pay in cash or not. Together with Google maps (avoid tolls option) we paid for only one toll in Rhode Island, all others were clearly identified. Apple do offer a similar app "Toll calc", but | think Toll Guru was a much stronger app.</p>
+                <a class="inline-flex items-center">
+              
+                  <span class="flex-grow flex flex-col pl-4">
+                    <span class="title-font font-medium text-gray-900">Joe9Ojnr</span>
+                    <span class="text-gray-500 text-sm">05/24/2019</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="p-4 md:w-1/2 w-full">
+              <div class="h-full bg-gray-100 p-8 rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4" viewBox="0 0 975.036 975.036">
+                  <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+                </svg>
+                <p class="leading-relaxed mb-6">This app is more than just a toll calculator. It is truly a one-stop shop for all traveling needs.
+                    We often go on family road trips and this app is so useful in helping us plan out our trip including duration, best route, cost of gas, traffic congestion and most importantly cost of tolls. What makes this app unique is that for the toll roads, the app tells you what type of payments are accepted (cash, credit card). Believe it or not some tolls only accept cash and knowing this ahead of time save us from embarrassment of not having enough coins.
+                    I highly recommend this app and best of all it is FREE!</p>
+                <a class="inline-flex items-center">
+                 
+                  <span class="flex-grow flex flex-col pl-4">
+                    <span class="title-font font-medium text-gray-900">Mom-on-the-road</span>
+                    <span class="text-gray-500 text-sm">03/16/2018</span>
+                  </span>
+                </a>
+              </div>
+            </div> <div class="p-4 md:w-1/2 w-full">
+              <div class="h-full bg-gray-100 p-8 rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4" viewBox="0 0 975.036 975.036">
+                  <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+                </svg>
+                <p class="leading-relaxed mb-6">BEST APP EVER! I'm an 0/0, this app figures out tolls, fuel expenditures, and it does truck routing. Before you take a load you know, EXACTLY, how much you're going to speed to run it. It just doesn't get any better than that. It has frozen on me a couple of times, but I still use my truck GPS, so its no biggie.</p>
+                <a class="inline-flex items-center">
+                 
+                  <span class="flex-grow flex flex-col pl-4">
+                    <span class="title-font font-medium text-gray-900">R Rdgz</span>
+                    <span class="text-gray-500 text-sm">05/12/2019</span>
+                  </span>
+                </a>
+              </div>
+            </div> <div class="p-4 md:w-1/2 w-full">
+              <div class="h-full bg-gray-100 p-8 rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4" viewBox="0 0 975.036 975.036">
+                  <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+                </svg>
+                <p class="leading-relaxed mb-6">Trucker. Was wondering how many tolls I was going to pay going to the northeast for the 1st. time. Found out tolls on the route were 32 bucks. Alternate route had 12.50 toll with 5 more miles total. App exceeded my expectations, even able to input my 18 wheeler's weight and axle count.</p>
+                <a class="inline-flex items-center">
+                 
+                  <span class="flex-grow flex flex-col pl-4">
+                    <span class="title-font font-medium text-gray-900">Jo Ho</span>
+                    <span class="text-gray-500 text-sm">05/12/2020</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-col text-center w-full mb-4">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-3 text-gray-900">For Publishing</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Download our assets</p>
+          </div>
+          <section class="text-gray-600 body-font">
+            <div class="container px-5 py-4 mx-auto flex flex-wrap">
+              <div class=" mx-auto">
+              
+                <div class="flex flex-wrap -mx-2">
+                  <div class="px-2 w-1/3">
+                    <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
+                      <img alt="gallery" class="w-full object-contain h-full object-center block opacity-25 absolute inset-0" src="./assets//screenShots.svg">
+                      <div class="text-center relative z-10 w-full">
+                        <h2 class="text-3xl text-gray-900 font-bold title-font mb-2">ScreenShots</h2>
+                    
+                        <a href="https://drive.google.com/drive/folders/1NLaoHUTeSKJ9mrxqVtmsem_QuD0oNI7i?usp=sharing" class="mt-3 text-blue-500 underline inline-flex text-2xl items-center">Download
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-8 h-8 ml-2" viewBox="0 0 24 24">
+                              <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="px-2 w-1/3">
+                    <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
+                      <img alt="gallery" class="w-full object-contain h-full object-center block opacity-25 absolute inset-0" src="./assets/videos.svg">
+                      <div class="text-center relative z-10 w-full">
+                        <h2 class="text-3xl text-gray-900 font-bold title-font mb-2">Videos</h2>
+                    
+                        <a href="https://www.youtube.com/channel/UCYPMLB5kxtENMtv30JY5M1A/videos?view_as=subscriber" class="mt-3 text-blue-500 underline inline-flex text-2xl items-center">Download
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-8 h-8 ml-2" viewBox="0 0 24 24">
+                              <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                          </a>
+                      </div>
+                    </div>
+                  </div>  <div class="px-2 w-1/3">
+                    <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
+                      <img alt="gallery" class="w-full object-contain h-full object-center block opacity-25 absolute inset-0" src="./assets/tollGuruLogo.png">
+                      <div class="text-center relative z-10 w-full">
+                        <h2 class="text-3xl text-gray-900 font-bold title-font mb-2">LOGO</h2>
+                    
+                        <a href="https://drive.google.com/drive/folders/1A1ndi_r-Nc1YcTBT9h4nOj_azOaIExV5" class="mt-3 text-blue-500 underline inline-flex text-2xl items-center">Download
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-8 h-8 ml-2" viewBox="0 0 24 24">
+                              <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+
+
+
+
+
+
+      
+
+
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto flex items-center md:flex-row flex-col">
+          <div class="flex flex-col md:pr-10 md:mb-0 mb-6 pr-0 w-full md:w-auto md:text-left text-center">
+            <h2 class="text-base text-blue-500 tracking-widest font-medium title-font mb-1">For any media related queries, please contact us at </h2>
+            <h1 class="md:text-3xl text-2xl font-medium title-font text-gray-900">Press Contact</h1>
+          </div>
+          <div class="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0 space-x-4">
+            <button class="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+             
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+              </svg>
+              
+              <span class="ml-4 flex items-start flex-col leading-none">
+                <span class="text-base text-gray-600 mb-1">Mail Us</span>
+                <span class="title-font font-medium">press@tollguru.com</span>
+              </span>
+            </button>
+        
+          </div>
+        </div>
+      </section>
+
 </body>
 </html>
 
